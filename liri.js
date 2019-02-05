@@ -8,7 +8,7 @@ axios.get(queryUrl).then(function(err,data) {
     if (err) {
         console.log(err);
     }
+    
+    console.log(data);
 
 });
-
-console.log("Hello World.");
