@@ -22,7 +22,8 @@ function logThis(text) {
 
 function getBand(artist) {
     // getBand() axios call to Spotify
-    var artist = process.argv[3];
+    //var artist = process.argv[3];
+    
     var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
     
     // console this url for debugging
@@ -55,7 +56,7 @@ function getBand(artist) {
 
 function getMovie(movie) {
 
-    var movie = process.argv[3];
+    //var movie = process.argv[3];
 
     // getBand() axios call to Spotify
     var queryUrl = "http://www.omdbapi.com/?i=tt3896198&apikey=3c945aef" + "&t=" + movie;
@@ -90,7 +91,7 @@ function getMovie(movie) {
 
 function getMusic(track) {
 
-    var track = process.argv[3];
+    //var track = process.argv[3];
 
     console.log(" ");
     console.log(track);
@@ -159,11 +160,13 @@ function doWhatItSays() {
 
         var dataArr = data.split(",");
 
-        var randomNumber = Math.floor(Math.random() * 4) + 1;  // returns a random integer from 1 to 4
+        var randomNumber = Math.floor(Math.random() * 3) + 1;  // returns a random integer from 1 to 3
         
+        //console.log(dataArr[1]);
+
         if(randomNumber === 1) {
             getMusic(dataArr[1]);
-        } else if (randomNumber = 2) {
+        } else if (randomNumber === 2) {
             getBand(dataArr[1]);
         } else {
             getMovie(dataArr[1]);
@@ -176,18 +179,18 @@ function doWhatItSays() {
 switch (action) {
 
     case "concert-this":
-        //console.log("Band");
-        getBand();
+        //console.log("Concert");
+        getBand(process.argv[3]);
     break;
 
     case "spotify-this-song":
-        console.log("Song");
-        getMusic();
+        //console.log("Spotify");
+        getMusic(process.argv[3]);
     break;
 
     case "movie-this":
         //console.log("Movies");
-        getMovie();
+        getMovie(process.argv[3]);
     break;
 
     case "do-what-it-says":
