@@ -3,12 +3,10 @@ var axios = require("axios");
 var queryUrl = "https://www.google.com";
 
 
-axios.get(queryUrl).then(function(err,data) {
-
-    if (err) {
-        console.log(err);
-    }
+axios.get(queryUrl).then(
     
-    console.log(data);
+    function(response) {
+
+        console.log(response);
 
 });
