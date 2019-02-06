@@ -32,8 +32,6 @@ function getBand(artist) {
     axios.get(queryUrl).then(
         function(response) {
 
-            var eventDetails = [];
-
             console.log(" ");
             console.log(artist);
             console.log("===========================");
