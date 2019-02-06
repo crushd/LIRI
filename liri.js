@@ -18,13 +18,13 @@ function logThis(text) {
         }
     });
 
-}
+};
 
 function getBand(artist) {
     // getBand() axios call to Spotify
     //var artist = process.argv[3];
-    
-    var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+    var f_artist = artist.replace('"','');
+    var queryUrl = "https://rest.bandsintown.com/artists/" + f_artist + "/events?app_id=codingbootcamp";
     
     // console this url for debugging
     console.log(queryUrl);
@@ -38,21 +38,27 @@ function getBand(artist) {
             console.log(artist);
             console.log("===========================");
 
-            for (var a = 0; a < response.data.length; a++) {
-                var venueName = response.data[a].venue.name;
-                var venueLocation = response.data[a].venue.city + ", " + response.data[a].venue.region + response.data[a].venue.country;
-                var showDateTime = moment(response.data[a].datetime).format("MM/DD/YYYY");
-                
-                logText = "\r\n" + "concert-this: " + showDateTime + ";" + venueName + ";" + response.data[a].venue.city + ", " + response.data[a].venue.region;
-                logThis(logText);
-                
-                console.log(showDateTime + "; " + venueName + "; " + response.data[a].venue.city);
-                
+            //console.log(response.data.length);
+
+            if (response.data.length > 0) {
+                for (var a = 0; a < response.data.length; a++) {
+                    var venueName = response.data[a].venue.name;
+                    var venueLocation = response.data[a].venue.city + ", " + response.data[a].venue.region + response.data[a].venue.country;
+                    var showDateTime = moment(response.data[a].datetime).format("MM/DD/YYYY");
+                    
+                    logText = "\r\n" + "concert-this: " + showDateTime + ";" + venueName + ";" + response.data[a].venue.city + ", " + response.data[a].venue.region;
+                    logThis(logText);
+                    
+                    console.log(showDateTime + "; " + venueName + "; " + response.data[a].venue.city);
+                    
+                }
+            } else {
+                getBand("Ace of Bass");
             }
             console.log(" ");
     });
 
-}
+};
 
 function getMovie(movie) {
 
@@ -87,7 +93,7 @@ function getMovie(movie) {
 
         }
     );
-}
+};
 
 function getMusic(track) {
 
@@ -102,8 +108,6 @@ function getMusic(track) {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
-
-
 
         var spotifyTracks = data.tracks;
         var spotifyItems = data.tracks.items;
@@ -147,7 +151,7 @@ function getMusic(track) {
         }
     });
 
-}
+};
 
 function doWhatItSays() {
     //console.log("do-what-it-says");
@@ -174,28 +178,48 @@ function doWhatItSays() {
 
     });
 
-}
+};
 
 switch (action) {
 
     case "concert-this":
-        //console.log("Concert");
+        console.log(" ");
+        console.log("================");
+        console.log("concert-this");
+        console.log("================");
+        console.log(" ");
+
         getBand(process.argv[3]);
     break;
 
     case "spotify-this-song":
-        //console.log("Spotify");
+        console.log(" ");
+        console.log("====================");
+        console.log("spotify-this-song");
+        console.log("====================");
+        console.log(" ");
+
         getMusic(process.argv[3]);
     break;
 
     case "movie-this":
-        //console.log("Movies");
+        console.log(" ");
+        console.log("====================");
+        console.log("movie-this");
+        console.log("====================");
+        console.log(" ");
+
         getMovie(process.argv[3]);
     break;
 
     case "do-what-it-says":
-        //console.log("Do it.");
+        console.log(" ");
+        console.log("====================");
+        console.log("do-what-it-says");
+        console.log("====================");
+        console.log(" ");
+
         doWhatItSays();
     break;
 
-}
+};
