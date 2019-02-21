@@ -51,7 +51,9 @@ function getBand(artist) {
                     
                 }
             } else {
-                getBand("Ace of Bass");
+                console.log(" ")
+                console.log("There are no records for: " + f_artist)
+                getBand("Ace of Base");
             }
             console.log(" ");
     });
@@ -59,6 +61,10 @@ function getBand(artist) {
 };
 
 function getMovie(movie) {
+
+    /* if (!process.argv[3]) {
+        getMovie("Mr. Nobody");
+    }; */
 
     //var movie = process.argv[3];
 
@@ -112,6 +118,11 @@ function getMusic(track) {
         var spotifyItemsLength = spotifyItems.length;
 
         //console.log(spotifyItems);
+        console.log(data.tracks.total);
+
+        if (data.tracks.total === 0) {
+            getMusic("The Sign Ace of Base");
+        }
 
         for (var s = 0 ; s < spotifyItemsLength ; s++){
             //  * The artist(s) name
@@ -161,6 +172,8 @@ function doWhatItSays() {
         }
 
         var dataArr = data.split(",");
+        
+        //console.log(dataArr);
 
         var randomNumber = Math.floor(Math.random() * 3) + 1;  // returns a random integer from 1 to 3
         
@@ -207,7 +220,16 @@ switch (action) {
         console.log("====================");
         console.log(" ");
 
-        getMovie(process.argv[3]);
+        var movieName = process.argv[3];
+
+        console.log("This is the cmd: " + movieName);
+        if (movieName === undefined) {
+            getMovie("Mr. Nobody");
+        } else {
+            
+            getMovie(process.argv[3]);
+        }
+
     break;
 
     case "do-what-it-says":
