@@ -1,2 +1,2 @@
 1. Video of working application:
-   https://youtube.com/
+   https://crushd.github.io/LIRI/DEMO.mp4
